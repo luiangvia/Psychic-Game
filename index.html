@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Psychic Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+    <div>
+    <h1>The Psychic Game</h1>
+    <p>Guess what letter I'm thinking of</p>
+    <p id="wins">Wins:</p>
+    <p id="losses">Losses:</p> 
+    <p id="guesses">Guesses Left: </p>
+    <p id="guessed">Your Guesses So Far:</p>   
+</div>
+    <script>
+    var alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l",
+    "m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+    var wins = 0;
+    var losses = 0;
+    var guessesleft = 10;
+    var guessed= [];
+
+    var randomguess = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+    document.onkeypress = function(event) {
+    var userGuess = event.key;
+    var options = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",];
+  
+   if (options.indexOf(userGuess) > -1) {
+
+if (userGuess === randomguess) {
+    wins++;
+    guessesleft = 10;
+    guessed = [];
+}
+
+if (userGuess != randomguess) {
+    guessesleft --;
+    guessed.push(userGuess);
+}
+
+if (guessesleft === 0) {
+
+guessesleft = 9;
+losses ++;
+guessed = [];
+}
+   }
+    document.getElementById("wins").innerHTML = "Wins: " + wins;
+    document.getElementById("losses").innerHTML = "Losses: " + losses;
+    document.getElementById("guesses").innerHTML = "Guesses Left: " + guessesleft;
+    document.getElementById("guessed").innerHTML = "Your Guesses So Far: " + guessed;
+}   
+
+    </script>
+</body>
+</html>
